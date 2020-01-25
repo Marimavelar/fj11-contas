@@ -10,6 +10,7 @@ public class Conta {
 	private String titular;
 	private int numero;
 	private String agencia;
+	
 	public String getTitular() {
 		return titular;
 	}
@@ -32,6 +33,10 @@ public class Conta {
 		return saldo;
 	}
 	
+	public String getTipo() {
+		return "Conta";
+	}
+	
 	/**
 	 * Método que incrementa valor ao saldo
 	 * @param valor
@@ -49,4 +54,10 @@ public class Conta {
 			this.saldo -= valor;
 		}
 	}
+	
+	public void transfere(double valor, Conta conta) {
+		this.saca(valor);
+		conta.deposita(valor);
+	}
+	
 }

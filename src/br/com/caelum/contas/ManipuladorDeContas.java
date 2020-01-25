@@ -27,7 +27,7 @@ public class ManipuladorDeContas {
 	
 	public void saca(Evento evento) {
 		double valor = evento.getDouble("valorOperacao");
-		this.conta.saca(valor + 0.10);	
+		this.conta.saca(valor);	
 	}
 	
 	public void transfere(Evento evento) {

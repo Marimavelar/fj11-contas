@@ -5,6 +5,7 @@ package br.com.caelum.contas.modelo;
  * @author Mariana Marcondes Avelar de Souza
  *
  */
+abstract 
 public class Conta {
 	private double saldo;
 	private String titular;
@@ -33,9 +34,7 @@ public class Conta {
 		return saldo;
 	}
 	
-	public String getTipo() {
-		return "Conta";
-	}
+	abstract public String getTipo();
 	
 	/**
 	 * Método que incrementa valor ao saldo

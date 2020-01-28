@@ -8,6 +8,7 @@ import br.com.caelum.javafx.api.util.Evento;
 public class ManipuladorDeContas {
 	private Conta conta;
 
+	// Método que cria a conta conforme o tipo	
 	public void criaConta(Evento evento) {
 		String tipo = evento.getSelecionadoNoRadio("tipo");
 		if(tipo.equals("Conta Corrente")) {
@@ -20,18 +21,21 @@ public class ManipuladorDeContas {
 		this.conta.setNumero(evento.getInt("numero"));
 	}
 	
+	// Método que deposita certo valor na conta do usuário
 	public void deposita(Evento evento) {
 		double valor = evento.getDouble("valorOperacao");
 		this.conta.deposita(valor);
 	}
 	
+	// Método que saca certo valor da conta do usuário
 	public void saca(Evento evento) {
 		double valor = evento.getDouble("valorOperacao");
 		this.conta.saca(valor);	
 	}
 	
+	// Método que transfere valores entre duas contas
 	public void transfere(Evento evento) {
 		Conta destino = (Conta) evento.getSelecionadoNoCombo("destino");
-		conta.transfere(evento.getDouble("valorTransferencia"), destino);
+		this.conta.transfere(evento.getDouble("valorTransferencia"), destino);
 	}
 }

@@ -1,5 +1,7 @@
 package br.com.caelum.contas.modelo;
 
+import br.com.caelum.contas.main.SaldoInsuficienteException;
+
 /**
  * Classe responsável por moldar as Contas do Banco
  * @author Mariana Marcondes Avelar de Souza
@@ -36,11 +38,27 @@ public class Conta {
 	
 	abstract public String getTipo();
 	
+	public String toString() {
+		return "[titular=" + this.titular + ", numero=" + this.numero + ", agencia=" + this.agencia;
+	}
+	
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false; 
+		}
+		Conta outraConta = (Conta) obj;
+		
+		return this.numero == outraConta.numero && this.agencia.contentEquals(outraConta.agencia);
+	}
+	
 	/**
 	 * Método que incrementa valor ao saldo
 	 * @param valor
 	 */
 	public void deposita(double valor) {
+		if(valor < 0) {
+			throw new IllegalArgumentException("Número inválido, você tentou depositar um número negativo.");
+		}
 		this.saldo += valor;
 	}
 	
@@ -49,7 +67,11 @@ public class Conta {
 	 * @param valor
 	 */
 	public void saca(double valor) {
-		if(valor <= this.saldo) {
+		if(valor < 0) {
+			throw new IllegalArgumentException("Número inválido, você tentou sacar um número negativo.");
+		} else if(valor > this.saldo) {
+			throw new SaldoInsuficienteException(valor);
+		} else {
 			this.saldo -= valor;
 		}
 	}

@@ -7,6 +7,7 @@ public class TestaArrays {
 	public static void main(String[] args) {
 		Conta[] contas = new Conta[10];
 		double mediaSaldos = 0;
+		Integer x;
 		
 		for(int i = 0; i < contas.length; i++) {
 			Conta conta = new ContaCorrente();

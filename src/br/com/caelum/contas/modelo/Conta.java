@@ -8,7 +8,7 @@ import br.com.caelum.contas.main.SaldoInsuficienteException;
  *
  */
 abstract 
-public class Conta {
+public class Conta implements Comparable<Conta> {
 	private double saldo;
 	private String titular;
 	private int numero;
@@ -81,4 +81,7 @@ public class Conta {
 		conta.deposita(valor);
 	}
 	
+	public int compareTo(Conta outraConta) {
+		return this.titular.compareTo(outraConta.titular);
+	}
 }

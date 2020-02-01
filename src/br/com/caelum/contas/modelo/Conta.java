@@ -42,14 +42,15 @@ public class Conta implements Comparable<Conta> {
 		return "[titular=" + this.titular + ", numero=" + this.numero + ", agencia=" + this.agencia;
 	}
 	
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false; 
-		}
-		Conta outraConta = (Conta) obj;
-		
-		return this.numero == outraConta.numero && this.agencia.contentEquals(outraConta.agencia);
-	}
+//	public boolean equals(Object obj) {
+//		if (obj == null) {
+//			return false; 
+//		}
+//		Conta outraConta = (Conta) obj;
+//		
+//		return this.numero == outraConta.numero && this.agencia.contentEquals(outraConta.agencia);
+//	}
+	
 	
 	/**
 	 * Método que incrementa valor ao saldo
@@ -60,6 +61,33 @@ public class Conta implements Comparable<Conta> {
 			throw new IllegalArgumentException("Número inválido, você tentou depositar um número negativo.");
 		}
 		this.saldo += valor;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((agencia == null) ? 0 : agencia.hashCode());
+		result = prime * result + numero;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Conta other = (Conta) obj;
+		if (agencia == null) {
+			if (other.agencia != null)
+				return false;
+		} else if (!agencia.equals(other.agencia))
+			return false;
+		if (numero != other.numero)
+			return false;
+		return true;
 	}
 	
 	/**
